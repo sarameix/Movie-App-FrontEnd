@@ -1,2 +1,2 @@
 # Movie-App-FrontEnd
-Complete FrontEnd Setup for Movie App
+Complete Front End Setup for Movie App
