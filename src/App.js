@@ -108,6 +108,19 @@ const App = () => {
     })
   }
 
+  // *** DELETE *** //
+
+  // Function to Delete Show
+  const handleDelete = (showData) => {
+    axios.delete(`https://fathomless-refuge-80112.herokuapp.com/shows/${showData._id}`)
+      .then(() => {
+        axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
+          .then((response) => {
+            setShows(response.data);
+          })
+      })
+  }
+
   // *** MISC *** //
 
   // Function to Toggle Pages
@@ -140,9 +153,7 @@ const App = () => {
                 {
                   shows.map((show) => {
                     return (
-                      <div className='show-container' key={show._id}>
-                        <Show show={show}/>
-                      </div>
+                      <Show show={show} handleDelete={handleDelete} setShows={setShows} />
                     )
                   })
                 }
