@@ -11,6 +11,7 @@ import axios from 'axios';
 ////////////////
 
 import Header from './components/Header';
+import AddForm from './components/AddForm';
 import Show from './components/Show';
 
 //////////////////
@@ -75,7 +76,34 @@ const App = () => {
     // Prevent Form Default
     event.preventDefault();
 
-    console.log(event);
+    // Reformat Date
+    let reformatCreated = [newCreated.split('-')[1], newCreated.split('-')[2], newCreated.split('-')[0]].join('-');
+
+    // Make Object with New States
+    const newShow = {
+      name: newName,
+      genre: newGenre,
+      image: newImage,
+      created: reformatCreated,
+      lastWatchedEp: newLastWatchedEp
+    };
+    
+    // Add Show to API with Axios Request
+    axios.post(
+      'https://fathomless-refuge-80112.herokuapp.com/shows/',
+      newShow
+    ).then(() => {
+      axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
+        .then((response) => {
+          setShows(response.data);
+          event.target.reset();
+          setNewName('');
+          setNewGenre('');
+          setNewCreated('');
+          setNewImage('');
+          setNewLastWatchedEp('');
+        })
+    })
   }
 
   ////////////////
@@ -97,13 +125,7 @@ const App = () => {
       <main>
         <section>
           <h1>Add New Show</h1>
-          <form className='add-form' onSubmit={handleNewShowSubmit}>
-            <div className='form-group'>
-              <label htmlFor="showNameInput">Name</label>
-              <input type="text" className="form-control" id="showNameInput" name="image" onChange={handleNewName}/>
-              <input className="submit-button" type="submit" value="Add New Show"/>
-            </div>
-          </form>
+          <AddForm handleNewName={handleNewName} handleNewGenre={handleNewGenre} handleNewCreated={handleNewCreated} handleNewImage={handleNewImage} handleNewLastWatchedEp={handleNewLastWatchedEp} handleNewShowSubmit={handleNewShowSubmit} />
         </section>
         <section>
           <h1>My Watch List</h1>

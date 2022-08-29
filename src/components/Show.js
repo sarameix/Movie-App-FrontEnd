@@ -4,9 +4,6 @@ const Show = (props) => {
     watchDate = [watchDate[1], watchDate[2].substring(0,2), watchDate[0]];
     watchDate = watchDate.join('-');
 
-    let watchTime = props.show.updatedAt;
-    console.log(watchTime);
-
     // Return HTML Elements
     return (
         <>
