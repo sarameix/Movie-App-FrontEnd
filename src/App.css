@@ -73,7 +73,7 @@ main {
 .show-container {
   background-color: rgb(75, 75, 75);
   width: 100%;
-  height: 125px;
+  height: 135px;
   border-radius: .5em;
   margin-bottom: 1.2em;
   display: flex;
@@ -82,13 +82,15 @@ main {
 
 .show-container > img {
   width: 25%;
-  height: 125px;
+  height: 135px;
   object-fit: cover;
+  border-top-left-radius: .5em;
+  border-bottom-left-radius: .5em;
   margin-right: 1.5em;
 }
 
 .show-info-container {
-  width: 75%;
+  width: 65%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -96,6 +98,19 @@ main {
 
 .show-info-container-left > * {
   margin: .2em 0;
+}
+
+.show-info-container-left > h3 {
+  font-size: 1em;
+  text-transform: uppercase;
+  width: max-content;
+  padding: .3em .55em;
+  border: 2px solid white;
+  border-radius: 1em;
+}
+
+.show-info-container-left > p {
+  margin-left: .5em;
 }
 
 .show-info-container-right {
@@ -108,5 +123,36 @@ main {
 }
 
 .show-info-container-right > h5 {
-  font-size: 1.05em;
+  font-size: 1em;
+}
+
+.modify-buttons-container {
+  background-color: rgb(91, 91, 91);
+  width: 10%;
+  height: 100%;
+  border-top-right-radius: .5em;
+  border-bottom-right-radius: .5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.update-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.image-input {
+  width: 27.5%;
+  margin-top: 1em;
+  margin-left: .5em;
+  margin-right: 1.5em;
+  align-self: flex-start;
+}
+
+.update-form > .show-info-container {
+  width: 72.5%;
 }
