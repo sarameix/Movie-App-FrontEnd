@@ -103,6 +103,7 @@ const App = () => {
           setNewCreated('');
           setNewImage('');
           setNewLastWatchedEp('');
+          setDisplayPage('watchList');
         })
     })
   }
@@ -134,7 +135,7 @@ const App = () => {
         {
           displayPage === 'watchList' ?
             <section>
-              <h1>My Watch List</h1>
+              <h1 className='page-header'>My Watch List</h1>
               <div className='shows-container'>
                 {
                   shows.map((show) => {
@@ -149,7 +150,7 @@ const App = () => {
             </section>
           : displayPage === 'addForm' ?
             <section>
-              <h1>Add New Show</h1>
+              <h1 className='page-header'>Add New Show</h1>
               <AddForm handleNewName={handleNewName} handleNewGenre={handleNewGenre} handleNewCreated={handleNewCreated} handleNewImage={handleNewImage} handleNewLastWatchedEp={handleNewLastWatchedEp} handleNewShowSubmit={handleNewShowSubmit} />
             </section>
           :

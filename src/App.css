@@ -58,6 +58,11 @@ main {
 /* Show Containers */
 /*******************/
 
+.page-header {
+  font-size: 2.25em;
+  margin-bottom: .85em;
+}
+
 .shows-container {
   display: flex;
   flex-direction: column;
@@ -70,8 +75,9 @@ main {
   width: 100%;
   height: 125px;
   border-radius: .5em;
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
   display: flex;
+  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.2);
 }
 
 .show-container > img {
@@ -88,7 +94,19 @@ main {
   justify-content: space-between;
 }
 
+.show-info-container-left > * {
+  margin: .2em 0;
+}
+
 .show-info-container-right {
   text-align: right;
   margin-right: 1.75em;
+}
+
+.show-info-container-right > * {
+  margin: .2em 0;
+}
+
+.show-info-container-right > h5 {
+  font-size: 1.05em;
 }

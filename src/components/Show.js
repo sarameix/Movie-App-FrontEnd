@@ -10,11 +10,14 @@ const Show = (props) => {
             <img src={props.show.image}/>
             <div className="show-info-container">
                 <div className="show-info-container-left">
-                    <h2>{props.show.name}</h2>
+                    <h3>{props.show.name}</h3>
+                    <p>{props.show.genre}</p>
                     <p>{props.show.lastWatchedEp}</p>
                 </div>
                 <div className="show-info-container-right">
-                    <h4>Last Watched:</h4>
+                    <h5>Created On:</h5>
+                    <p>{props.show.created}</p>
+                    <h5>Last Watched:</h5>
                     <p>{watchDate}</p>
                 </div>
             </div>
