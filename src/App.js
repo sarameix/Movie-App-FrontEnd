@@ -25,6 +25,7 @@ const App = () => {
   ////////////
 
   let [shows, setShows] = useState([]);
+  let [displayPage, setDisplayPage] = useState('watchList');
   let [newName, setNewName] = useState('');
   let [newGenre, setNewGenre] = useState('');
   let [newCreated, setNewCreated] = useState('');
@@ -106,6 +107,13 @@ const App = () => {
     })
   }
 
+  // *** MISC *** //
+
+  // Function to Toggle Pages
+  const handleDisplayChange = (event) => {
+    setDisplayPage(event.target.value);
+  }
+
   ////////////////
   // USE EFFECT //
   ////////////////
@@ -121,27 +129,32 @@ const App = () => {
 
   return (
     <>
-      <Header/>
+      <Header handleDisplayChange={handleDisplayChange} />
       <main>
-        <section>
-          <h1>Add New Show</h1>
-          <AddForm handleNewName={handleNewName} handleNewGenre={handleNewGenre} handleNewCreated={handleNewCreated} handleNewImage={handleNewImage} handleNewLastWatchedEp={handleNewLastWatchedEp} handleNewShowSubmit={handleNewShowSubmit} />
-        </section>
-        <section>
-          <h1>My Watch List</h1>
-          <div className='shows-container'>
-            {
-              shows.map((show) => {
-                return (
-                  <div className='show-container' key={show._id}>
-                    <Show show={show}/>
-                  </div>
-                )
-              })
-            }
-          </div>
-        </section>
-        
+        {
+          displayPage === 'watchList' ?
+            <section>
+              <h1>My Watch List</h1>
+              <div className='shows-container'>
+                {
+                  shows.map((show) => {
+                    return (
+                      <div className='show-container' key={show._id}>
+                        <Show show={show}/>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </section>
+          : displayPage === 'addForm' ?
+            <section>
+              <h1>Add New Show</h1>
+              <AddForm handleNewName={handleNewName} handleNewGenre={handleNewGenre} handleNewCreated={handleNewCreated} handleNewImage={handleNewImage} handleNewLastWatchedEp={handleNewLastWatchedEp} handleNewShowSubmit={handleNewShowSubmit} />
+            </section>
+          :
+            null
+        }
       </main>
     </>
   );
