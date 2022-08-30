@@ -1,3 +1,9 @@
+/****************/
+/* Font Imports */
+/****************/
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400&display=swap');
+
 /*****************/
 /* Sticky Header */
 /*****************/
@@ -6,7 +12,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(48, 48, 48);
   color: white;
   width: 100%;
   height: 100px;
@@ -18,7 +24,12 @@ header {
 }
 
 .header-title {
-  margin-left: .75em;
+  font-size: 3.2em;
+  /* -webkit-text-stroke: 1px white; */
+  letter-spacing: .06em;
+  color: rgb(164, 0, 0);
+  margin: 0 .55em;
+  text-shadow: -1px -1px 0px rgb(255, 67, 67), 1px 1px 2px rgb(0, 0, 0);
 }
 
 .header-buttons {
@@ -37,7 +48,7 @@ header {
 }
 
 .header-buttons > *:hover{
-  color: rgb(255, 21, 0)
+  color: rgb(229, 19, 0)
 }
 
 /*************/
@@ -45,8 +56,9 @@ header {
 /*************/
 
 body {
-  background-color: rgb(50, 50, 50);
-  color: white
+  background-color: rgb(52, 52, 52);
+  color: white;
+  font-family: 'Open Sans', sans-serif;
 }
 
 main {
@@ -54,13 +66,17 @@ main {
   margin-top: 130px;
 }
 
+h1 {
+  font-family: 'Bebas Neue', cursive;
+}
+
 /*******************/
 /* Show Containers */
 /*******************/
 
 .page-header {
-  font-size: 2.25em;
-  margin-bottom: .6em;
+  font-size: 3.25em;
+  margin-bottom: .3em;
 }
 
 .sort-form {
@@ -72,6 +88,7 @@ main {
   background-color: rgb(163, 4, 4);
   color: white;
   border-style: none;
+  text-transform: uppercase;
 }
 
 .shows-container {
@@ -112,10 +129,12 @@ main {
 }
 
 .show-info-container-left > h3 {
-  font-size: 1em;
+  font-size: 1.3em;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: .15em;
   text-transform: uppercase;
   width: max-content;
-  padding: .3em .55em;
+  padding: .2em .65em .1em .65em;
   border: 2px solid white;
   border-radius: 1em;
 }
@@ -136,8 +155,6 @@ main {
 .show-info-container-right > h5 {
   font-size: 1em;
 }
-
-
 
 /************/
 /* Add Form */
