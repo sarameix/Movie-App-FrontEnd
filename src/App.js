@@ -13,6 +13,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import AddForm from './components/AddForm';
 import Show from './components/Show';
+import SortForm from './components/SortForm';
 
 //////////////////
 // APP FUNCTION //
@@ -41,14 +42,6 @@ const App = () => {
 
   // Function to Populate Show Data from BackEnd
   const getShows = () => {
-    axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/").then((response) => {
-      const sortedShows = sortShowArray(sortBy);
-      setShows(sortedShows);
-    })
-  }
-
-  // Function to Populate Show Data from BackEnd on Load
-  const getShowsOnLoad = () => {
     axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/").then((response) => {
       setShows(response.data.sort((a, b) => {
         let aDate = a.updatedAt.toUpperCase();
@@ -149,8 +142,8 @@ const App = () => {
   }
 
   // Function to Sort Array of Show Objects
-  const sortShowArray = (key) => {
-    const sortedShows = shows;
+  const sortShowArray = (key, showsArray) => {
+    const sortedShows = showsArray;
     if (key === 'mostRecent') {
       sortedShows.sort((a, b) => {
         let aDate = a.updatedAt.toUpperCase();
@@ -196,9 +189,16 @@ const App = () => {
     return sortedShows;
   }
 
+  // Function to Re-Sort Shows When Sort Dropdown Changes
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
-    getShows();
+    // setTimeout(() => getShows(), 1000);
+    axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/")
+      .then((response) => {
+        const sortedShows = sortShowArray(event.target.value, response.data);
+        console.log(event.target.value, sortedShows);
+        setShows(sortedShows);
+      }) 
   }
 
   ////////////////
@@ -207,7 +207,7 @@ const App = () => {
 
   // Use Effect to Populate Show Data
   useEffect(()=>{
-    getShowsOnLoad();
+    getShows();
   }, [])
 
   ////////////////////////
@@ -222,18 +222,7 @@ const App = () => {
           displayPage === 'watchList' ?
             <section>
               <h1 className='page-header'>My Watch List</h1>
-              <form className="inline-form sort-form">
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <label className="input-group-text sort-label" htmlFor="inputGroupSelect01">Sort By</label>
-                    </div>
-                    <select className="custom-select" id="inputGroupSelect01" name="sortBy" defaultValue="mostRecent" onChange={handleSortChange}>
-                      <option value="mostRecent">Most Recent</option>
-                      <option value="showName">Show Name</option>
-                      <option value="showGenre">Show Genre</option>
-                    </select>
-                </div>
-              </form>
+              <SortForm handleSortChange={handleSortChange} />
               <div className='shows-container'>
                 {
                   shows.map((show) => {
