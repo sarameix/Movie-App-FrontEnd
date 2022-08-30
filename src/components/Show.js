@@ -53,7 +53,7 @@ const Show = (props) => {
 
     // Return HTML Elements
     return (
-        <div className='show-container' key={props.show._id}>
+        <div className='show-container'>
             {
                 updateMode ?
                     <form className='update-form' onSubmit={handleUpdateSubmit}>

@@ -26,6 +26,7 @@ const App = () => {
 
   let [shows, setShows] = useState([]);
   let [displayPage, setDisplayPage] = useState('watchList');
+  let [sortBy, setSortBy] = useState('mostRecent');
   let [newName, setNewName] = useState('');
   let [newGenre, setNewGenre] = useState('');
   let [newCreated, setNewCreated] = useState('');
@@ -41,7 +42,26 @@ const App = () => {
   // Function to Populate Show Data from BackEnd
   const getShows = () => {
     axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/").then((response) => {
-      setShows(response.data);
+      const sortedShows = sortShowArray(sortBy);
+      setShows(sortedShows);
+    })
+  }
+
+  // Function to Populate Show Data from BackEnd on Load
+  const getShowsOnLoad = () => {
+    axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/").then((response) => {
+      setShows(response.data.sort((a, b) => {
+        let aDate = a.updatedAt.toUpperCase();
+        let bDate = b.updatedAt.toUpperCase();
+
+        if (aDate < bDate) {
+          return 1;
+        }
+        if (aDate > bDate) {
+            return -1;
+        }
+        return 0;
+      }));
     })
   }
 
@@ -128,13 +148,66 @@ const App = () => {
     setDisplayPage(event.target.value);
   }
 
+  // Function to Sort Array of Show Objects
+  const sortShowArray = (key) => {
+    const sortedShows = shows;
+    if (key === 'mostRecent') {
+      sortedShows.sort((a, b) => {
+        let aDate = a.updatedAt.toUpperCase();
+        let bDate = b.updatedAt.toUpperCase();
+
+        if (aDate < bDate) {
+          return 1;
+        }
+        if (aDate > bDate) {
+            return -1;
+        }
+        return 0;
+      });
+    } else if (key === 'showName') {
+      sortedShows.sort((a, b) => {
+        let aName = a.name.toLowerCase();
+        let bName = b.name.toLowerCase();
+
+        if (aName < bName) {
+            return -1;
+        }
+        if (aName > bName) {
+            return 1;
+        }
+        return 0;
+      });
+    } else if (key === 'showGenre') {
+      sortedShows.sort((a, b) => {
+        let aGenre = a.genre.toLowerCase();
+        let bGenre = b.genre.toLowerCase();
+
+        if (aGenre < bGenre) {
+            return -1;
+        }
+        if (aGenre > bGenre) {
+            return 1;
+        }
+        return 0;
+      });
+    }
+    
+    // Return Sorted Array
+    return sortedShows;
+  }
+
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
+    getShows();
+  }
+
   ////////////////
   // USE EFFECT //
   ////////////////
 
   // Use Effect to Populate Show Data
   useEffect(()=>{
-    getShows();
+    getShowsOnLoad();
   }, [])
 
   ////////////////////////
@@ -149,11 +222,23 @@ const App = () => {
           displayPage === 'watchList' ?
             <section>
               <h1 className='page-header'>My Watch List</h1>
+              <form className="inline-form sort-form">
+                <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <label className="input-group-text sort-label" htmlFor="inputGroupSelect01">Sort By</label>
+                    </div>
+                    <select className="custom-select" id="inputGroupSelect01" name="sortBy" defaultValue="mostRecent" onChange={handleSortChange}>
+                      <option value="mostRecent">Most Recent</option>
+                      <option value="showName">Show Name</option>
+                      <option value="showGenre">Show Genre</option>
+                    </select>
+                </div>
+              </form>
               <div className='shows-container'>
                 {
                   shows.map((show) => {
                     return (
-                      <Show show={show} handleDelete={handleDelete} setShows={setShows} />
+                      <Show show={show} handleDelete={handleDelete} setShows={setShows} key={show._id} />
                     )
                   })
                 }
