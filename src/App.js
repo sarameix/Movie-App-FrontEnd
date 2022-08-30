@@ -191,8 +191,11 @@ const App = () => {
 
   // Function to Re-Sort Shows When Sort Dropdown Changes
   const handleSortChange = (event) => {
+    // Prevent Form Default
+    event.preventDefault();
+
+    // Set Sort By State
     setSortBy(event.target.value);
-    // setTimeout(() => getShows(), 1000);
     axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/")
       .then((response) => {
         const sortedShows = sortShowArray(event.target.value, response.data);

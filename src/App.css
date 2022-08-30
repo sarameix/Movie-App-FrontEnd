@@ -41,6 +41,7 @@ header {
   background-color: rgba(255, 255, 255, 0);
   color: white;
   font-size: 1.2em;
+  text-transform: uppercase;
   white-space: nowrap;
   border-style: none;
   margin: 0 .5em;
@@ -161,7 +162,7 @@ h1 {
 /************/
 
 .add-submit-button {
-  background-color: rgb(173, 0, 0);
+  background-color: rgb(156, 0, 0);
   color: white;
   padding: .25em .65em;
   border-radius: .25em;
@@ -188,6 +189,67 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.modify-buttons-container > button, .submit-button {
+  background-color: rgb(190, 0, 0);
+  border-style: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: .5em;
+  border: 1px solid rgb(210, 0, 0);
+  margin: .3em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.2);
+}
+
+.modify-buttons-container > button:hover, .submit-button:hover {
+  background-color: rgb(148, 0, 0);
+  border: 1px solid rgb(170, 0, 0);
+}
+
+.edit-button {
+  width: 25px;
+  height: 25px;
+  content: url("../public/icons/edit-icon.png");
+}
+
+.delete-button {
+  width: 26px;
+  height: 26px;
+  content: url("../public/icons/delete-icon.png");
+}
+
+.back-button {
+  width: 22px;
+  height: 22px;
+  content: url("../public/icons/back-icon.png");
+}
+
+.submit-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: .3em 0;
+}
+
+.submit-button {
+  margin: 0;
+  position: absolute;
+}
+
+.submit-button-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  content: url("../public/icons/submit-icon.png");
+  pointer-events: none;
 }
 
 .update-form {

@@ -72,8 +72,14 @@ const Show = (props) => {
                             </div>
                         </div>
                         <div className="modify-buttons-container">
-                            <button onClick={() => {setUpdateMode(!updateMode)}}>X</button>
-                            <input className="submit-button" type="submit" value="Submit"/>
+                            <button onClick={() => {setUpdateMode(!updateMode)}}>
+                                <div className='back-button'></div> 
+                            </button>
+                            <div className='submit-container'>
+                                <input className="submit-button" type="submit" value=" " />
+                                <div className="submit-button-icon"></div>
+                            </div>
+                            
                         </div>
                         <input type="hidden" name="showID" value={props.show._id} />
                     </form>
@@ -94,8 +100,12 @@ const Show = (props) => {
                             </div>
                         </div>
                         <div className="modify-buttons-container">
-                            <button onClick={() => {setUpdateMode(!updateMode)}}>Edit</button>
-                            <button onClick={ () => {props.handleDelete(props.show)}} >Del</button>
+                            <button onClick={() => {setUpdateMode(!updateMode)}}>
+                                <div className='edit-button'></div>
+                            </button>
+                            <button onClick={ () => {props.handleDelete(props.show)}} >
+                                <div className='delete-button'></div>
+                            </button>
                         </div>
                     </>
             }
