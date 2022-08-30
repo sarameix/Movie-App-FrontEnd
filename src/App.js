@@ -13,7 +13,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import AddForm from './components/AddForm';
 import Show from './components/Show';
-
+import RandomShow from './components/RandomShow';
 //////////////////
 // APP FUNCTION //
 //////////////////
@@ -135,6 +135,7 @@ const App = () => {
   // Use Effect to Populate Show Data
   useEffect(()=>{
     getShows();
+    
   }, [])
 
   ////////////////////////
@@ -159,10 +160,15 @@ const App = () => {
                 }
               </div>
             </section>
-          : displayPage === 'addForm' ?
+           :displayPage === 'addForm' ?
             <section>
               <h1 className='page-header'>Add New Show</h1>
               <AddForm handleNewName={handleNewName} handleNewGenre={handleNewGenre} handleNewCreated={handleNewCreated} handleNewImage={handleNewImage} handleNewLastWatchedEp={handleNewLastWatchedEp} handleNewShowSubmit={handleNewShowSubmit} />
+            </section>
+            
+            :displayPage === 'randomMovie' ?
+            <section>
+            <RandomShow show={shows}/>
             </section>
           :
             null

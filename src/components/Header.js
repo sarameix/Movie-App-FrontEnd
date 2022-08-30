@@ -5,6 +5,7 @@ const Header = (props) => {
             <div className="header-buttons">
                 <button value='addForm' onClick={props.handleDisplayChange}>Add New Show</button>
                 <button value='watchList' onClick={props.handleDisplayChange}>My Watch List</button>
+                <button value= 'randomMovie' onClick={props.handleDisplayChange}>Random Movie</button>
             </div>
         </header>
     )
