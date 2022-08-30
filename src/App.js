@@ -109,7 +109,7 @@ const App = () => {
     ).then(() => {
       axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
         .then((response) => {
-          setShows(response.data);
+          setShows(sortShowArray('mostRecent', response.data));
           event.target.reset();
           setNewName('');
           setNewGenre('');
@@ -129,7 +129,7 @@ const App = () => {
       .then(() => {
         axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
           .then((response) => {
-            setShows(response.data);
+            setShows(sortShowArray('mostRecent', response.data));
           })
       })
   }
@@ -230,7 +230,7 @@ const App = () => {
                 {
                   shows.map((show) => {
                     return (
-                      <Show show={show} handleDelete={handleDelete} setShows={setShows} key={show._id} />
+                      <Show show={show} handleDelete={handleDelete} setShows={setShows} sortShowArray={sortShowArray} key={show._id} />
                     )
                   })
                 }

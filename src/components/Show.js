@@ -45,7 +45,7 @@ const Show = (props) => {
           ).then(() => {
             axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
               .then((response) => {
-                props.setShows(response.data);
+                props.setShows(props.sortShowArray('mostRecent', response.data));
                 setUpdateMode(!updateMode);
               })
           })
