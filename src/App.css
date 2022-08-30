@@ -29,7 +29,7 @@ header {
   letter-spacing: .06em;
   color: rgb(164, 0, 0);
   margin: 0 .55em;
-  text-shadow: -1px -1px 0px rgb(255, 67, 67), 1px 1px 2px rgb(0, 0, 0);
+  text-shadow: -1px -1px 0px rgb(255, 80, 80), 1px 1px 2px rgb(0, 0, 0);
 }
 
 .header-buttons {
