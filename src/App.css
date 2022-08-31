@@ -25,9 +25,8 @@ header {
 
 .header-title {
   font-size: 3.2em;
-  /* -webkit-text-stroke: 1px white; */
   letter-spacing: .06em;
-  color: rgb(164, 0, 0);
+  color: rgb(190, 0, 0);
   margin: 0 .55em;
   text-shadow: -1px -1px 0px rgb(255, 80, 80), 1px 1px 2px rgb(0, 0, 0);
 }
@@ -50,6 +49,37 @@ header {
 
 .header-buttons > *:hover{
   color: rgb(229, 19, 0)
+}
+
+/**********/
+/* Footer */
+/**********/
+
+footer {
+  background-color: rgb(52, 52, 52);
+  width: 100%;
+  height: 70px;
+  margin-top: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px -4px 8px rgba(1, 1, 1, 0.3);
+}
+
+footer > h5 {
+  font-size: 1.1em;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgb(0, 0, 0);
+}
+
+.footer-logo {
+  text-transform: uppercase;
+  font-size: 1.3em;
+  letter-spacing: .06em;
+  color: rgb(190, 0, 0);
+  margin: .1em .25em 0 .4em;
+  text-shadow: -1px -1px 0px rgb(255, 80, 80), 1px 1px 2px rgb(0, 0, 0);
 }
 
 /*************/
@@ -161,8 +191,12 @@ h1 {
 /* Add Form */
 /************/
 
+.add-form {
+  margin-bottom: 50px;
+}
+
 .add-submit-button {
-  background-color: rgb(156, 0, 0);
+  background-color: rgb(180, 0, 0);
   color: white;
   padding: .25em .65em;
   border-radius: .25em;
@@ -172,7 +206,7 @@ h1 {
 }
 
 .add-submit-button:hover {
-  background-color: rgb(128, 0, 0);
+  background-color: rgb(156, 0, 0);
 }
 
 /***************/
@@ -273,4 +307,87 @@ h1 {
 
 .update-form > .modify-buttons-container {
   width: 11.25%;
+}
+
+/****************/
+/* Random Movie */
+/****************/
+
+.random-show-container {
+  width: 550px;
+  margin: 160px auto 65px auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 6px 3px rgba(0, 0, 0, 0.2);
+}
+
+.random-show-container > img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+  margin-right: 1.5em;
+}
+
+.random-show-info-container {
+  background-color: rgb(75, 75, 75);
+  padding: .5em .2em;
+  border-bottom-left-radius: .5em;
+  border-bottom-right-radius: .5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.random-show-info-container > h3 {
+  font-size: 1.85em;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  width: max-content;
+  padding: .2em .65em .1em .65em;
+  border: 2px solid white;
+  border-radius: 1em;
+  margin: .6em 0;
+}
+
+.random-show-info-container > p {
+  font-size: 1.2em;
+}
+
+/*****************/
+/* Media Queries */
+/*****************/
+
+@media all and (max-width: 876px) {
+  
+  header {
+    flex-direction: column;
+    justify-content: center;
+    height: 125px;
+  }
+
+  .header-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  main {
+    margin-top: 150px;
+  }
+
+  .show-container {
+    width: 100%;
+    height: 200px;
+  }
+
+  .show-container > img, .modify-buttons-container {
+    height: 200px;
+  }
+
+  .random-show-container {
+    width: 80%;
+  }
 }
