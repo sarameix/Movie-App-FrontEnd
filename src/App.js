@@ -13,7 +13,12 @@ import axios from 'axios';
 import Header from './components/Header';
 import AddForm from './components/AddForm';
 import Show from './components/Show';
+
+import SortForm from './components/SortForm';
+
+
 import RandomShow from './components/RandomShow';
+
 //////////////////
 // APP FUNCTION //
 //////////////////
@@ -26,6 +31,7 @@ const App = () => {
 
   let [shows, setShows] = useState([]);
   let [displayPage, setDisplayPage] = useState('watchList');
+  let [sortBy, setSortBy] = useState('mostRecent');
   let [newName, setNewName] = useState('');
   let [newGenre, setNewGenre] = useState('');
   let [newCreated, setNewCreated] = useState('');
@@ -41,7 +47,18 @@ const App = () => {
   // Function to Populate Show Data from BackEnd
   const getShows = () => {
     axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/").then((response) => {
-      setShows(response.data);
+      setShows(response.data.sort((a, b) => {
+        let aDate = a.updatedAt.toUpperCase();
+        let bDate = b.updatedAt.toUpperCase();
+
+        if (aDate < bDate) {
+          return 1;
+        }
+        if (aDate > bDate) {
+            return -1;
+        }
+        return 0;
+      }));
     })
   }
 
@@ -96,7 +113,7 @@ const App = () => {
     ).then(() => {
       axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
         .then((response) => {
-          setShows(response.data);
+          setShows(sortShowArray('mostRecent', response.data));
           event.target.reset();
           setNewName('');
           setNewGenre('');
@@ -116,7 +133,7 @@ const App = () => {
       .then(() => {
         axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
           .then((response) => {
-            setShows(response.data);
+            setShows(sortShowArray('mostRecent', response.data));
           })
       })
   }
@@ -126,6 +143,69 @@ const App = () => {
   // Function to Toggle Pages
   const handleDisplayChange = (event) => {
     setDisplayPage(event.target.value);
+  }
+
+  // Function to Sort Array of Show Objects
+  const sortShowArray = (key, showsArray) => {
+    const sortedShows = showsArray;
+    if (key === 'mostRecent') {
+      sortedShows.sort((a, b) => {
+        let aDate = a.updatedAt.toUpperCase();
+        let bDate = b.updatedAt.toUpperCase();
+
+        if (aDate < bDate) {
+          return 1;
+        }
+        if (aDate > bDate) {
+            return -1;
+        }
+        return 0;
+      });
+    } else if (key === 'showName') {
+      sortedShows.sort((a, b) => {
+        let aName = a.name.toLowerCase();
+        let bName = b.name.toLowerCase();
+
+        if (aName < bName) {
+            return -1;
+        }
+        if (aName > bName) {
+            return 1;
+        }
+        return 0;
+      });
+    } else if (key === 'showGenre') {
+      sortedShows.sort((a, b) => {
+        let aGenre = a.genre.toLowerCase();
+        let bGenre = b.genre.toLowerCase();
+
+        if (aGenre < bGenre) {
+            return -1;
+        }
+        if (aGenre > bGenre) {
+            return 1;
+        }
+        return 0;
+      });
+    }
+    
+    // Return Sorted Array
+    return sortedShows;
+  }
+
+  // Function to Re-Sort Shows When Sort Dropdown Changes
+  const handleSortChange = (event) => {
+    // Prevent Form Default
+    event.preventDefault();
+
+    // Set Sort By State
+    setSortBy(event.target.value);
+    axios.get("https://fathomless-refuge-80112.herokuapp.com/shows/")
+      .then((response) => {
+        const sortedShows = sortShowArray(event.target.value, response.data);
+        console.log(event.target.value, sortedShows);
+        setShows(sortedShows);
+      }) 
   }
 
   ////////////////
@@ -150,11 +230,12 @@ const App = () => {
           displayPage === 'watchList' ?
             <section>
               <h1 className='page-header'>My Watch List</h1>
+              <SortForm handleSortChange={handleSortChange} />
               <div className='shows-container'>
                 {
                   shows.map((show) => {
                     return (
-                      <Show show={show} handleDelete={handleDelete} setShows={setShows} />
+                      <Show show={show} handleDelete={handleDelete} setShows={setShows} sortShowArray={sortShowArray} key={show._id} />
                     )
                   })
                 }
