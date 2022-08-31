@@ -255,6 +255,9 @@ const App = () => {
             null
         }
       </main>
+      <footer>
+        <h5 className="footer-text">© 2022 <span>T.V. Tracker.</span> All Rights Reserved.</h5>
+      </footer>
     </>
   );
 }
