@@ -13,10 +13,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import AddForm from './components/AddForm';
 import Show from './components/Show';
-
 import SortForm from './components/SortForm';
-
-
 import RandomShow from './components/RandomShow';
 
 //////////////////
@@ -215,7 +212,6 @@ const App = () => {
   // Use Effect to Populate Show Data
   useEffect(()=>{
     getShows();
-    
   }, [])
 
   ////////////////////////
@@ -256,7 +252,9 @@ const App = () => {
         }
       </main>
       <footer>
-        <h5 className="footer-text">© 2022 <span>T.V. Tracker.</span> All Rights Reserved.</h5>
+        <h5 className="footer-text">© 2022</h5>
+        <h5 className="footer-logo">T.V. Tracker.</h5>
+        <h5>All Rights Reserved.</h5>
       </footer>
     </>
   );
