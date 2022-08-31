@@ -21,7 +21,7 @@ const AddForm = (props) => {
                 <label htmlFor="showImageInput">Preview Image</label>
                 <input type="text" className="form-control" id="showImageInput" onChange={props.handleNewImage}/>
             </div>
-            <input className="submit-button" type="submit" value="Add New Show"/>
+            <input className="add-submit-button" type="submit" value="Add New Show"/>
         </form>
     )
     
