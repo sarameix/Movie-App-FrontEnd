@@ -5,11 +5,13 @@
 import React, {useState} from 'react'
 import Show from './Show';
 
-
-
 const RandomShow = (props) => {
     // Shuffle Shows Array
-    let shuffleProps=props.show.sort((a,b) => 0.5 - Math.random());
+    const shuffleShows = [];
+    for (let i = 0; i < props.show.length; i++) {
+        shuffleShows.push(props.show[i]);
+    }
+    let shuffleProps=shuffleShows.sort((a,b) => 0.5 - Math.random());
     const items = shuffleProps.slice(0,1);
 
     // Make Last Watched Date from Data

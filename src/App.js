@@ -5,6 +5,8 @@
 import './App.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 ////////////////
 // COMPONENTS //
@@ -126,13 +128,28 @@ const App = () => {
 
   // Function to Delete Show
   const handleDelete = (showData) => {
-    axios.delete(`https://fathomless-refuge-80112.herokuapp.com/shows/${showData._id}`)
-      .then(() => {
-        axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
-          .then((response) => {
-            setShows(sortShowArray('mostRecent', response.data));
-          })
-      })
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: `Are you sure you want to delete ${showData.name}?`,
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            axios.delete(`https://fathomless-refuge-80112.herokuapp.com/shows/${showData._id}`)
+            .then(() => {
+              axios.get('https://fathomless-refuge-80112.herokuapp.com/shows/')
+                .then((response) => {
+                  setShows(sortShowArray('mostRecent', response.data));
+                })
+            })
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    });
   }
 
   // *** MISC *** //
