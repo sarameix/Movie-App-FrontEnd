@@ -75,10 +75,11 @@ footer > h5 {
 
 .footer-logo {
   text-transform: uppercase;
-  font-size: 1.3em;
+  font-size: 1.55em;
+  font-family: 'Bebas Neue', cursive;
   letter-spacing: .06em;
   color: rgb(190, 0, 0);
-  margin: .1em .25em 0 .4em;
+  margin: .17em .25em 0 .4em;
   text-shadow: -1px -1px 0px rgb(255, 80, 80), 1px 1px 2px rgb(0, 0, 0);
 }
 
